@@ -13,7 +13,7 @@ const getAllanimes = (req, res) => {
 
 const getAnimeById = (req, res) => {
     const id = parseInt(req.params.id);
-    const anime = animes.find(a => caches.id === id);
+    const anime = animes.find(a => a.id === id);
 
     if (!anime) {
         return res.status(404).json({
@@ -31,6 +31,7 @@ const getAnimeById = (req, res) => {
 const createAnime = (req, res) => {
     const {titulo, genero, estudio, anoLancamento, episodios, status, classificacao, temporadas} = req.body;
 
+
     const generoAnime = ["Ação", "Fantasia Sombria", "Pós-apocalíptico", "Sobrenatural", "Aventura", "Super-herói", "Artes Marciais", "Suspense", "Mistério", "Comédia", "Slice of Life" ];
 
     if (!titulo) {
@@ -45,13 +46,13 @@ const createAnime = (req, res) => {
             message: "O campo genero é obrigatorio"
         });
     }
-    if (estudio) {
+    if (!estudio) {
         return res.status(400).json({
             success: false,
             message: "O campo estudio é obrigatorio"
         });
     }
-    if (anoLancamento) {
+    if (!anoLancamento) {
         return res.status(400).json({
             success: false,
             message: "O campo anolancamento é obrigatorio"
@@ -63,25 +64,27 @@ const createAnime = (req, res) => {
             message: "O campo episodio é obrigatorio"
         });
     }
-    if (status) {
+    if (!status) {
         return res.status(400).json({
             success: false,
             message: "O campo status é obrigatorio"
         });
     }
-    if (classificacao) {
+    if (!classificacao) {
         return res.status(400).json({
             success: false,
             message: "O campo calssificação é obrigatorio"
         });
     }
-    if (temporadas) {
+    if (!temporadas) {
         return res.status(400).json({
             success: false,
             message: "O campo temporada é obrigatorio"
         });
     }
-    if (episodios >= 1) {
+
+
+    if (episodios > 0) {
         return res.status(400).json({
             success: false,
             message: "O anime deve ter mais que um episodio"
@@ -168,17 +171,42 @@ const updateAnime = (req, res) => {
         });
     }
 
-    if (episodios >= 1) {
+    if (episodios <= 1) {
         return res.status(400).json({
             success: false,
             message: "O anime deve ter mais que 1 episodio "
         });
     }
+
+    console.log(animes);
+    
+
+    const animesAtualizados = animes.map(anime => 
+        anime.id === id
+    ? {
+        ...anime,
+        ...anime(titulo && { titulo }),
+        ...anime(genero && { genero }),
+        ...anime(estudio && { estudio }),
+        ...anime(anoLancamento && { anoLancamento }),
+        ...anime(episodios && { episodios }),
+        ...anime(status && { status }),
+        ...anime(classificacao && { classificacao }),
+        ...anime(temporadas && { temporadas })
+    }
+       :anime 
+    );
+
+    animes.splice(0, animes.length, ...animesAtualizados);
+
+    const animeAtualizado = animes.find(c => c.id === id);
+
+    res.status(200).json({
+        success: true,
+        message: "Carro atualizado com sucesso",
+        data: carroAtualizado
+    });
 }
-
-
-
-
 
 // depois de tudo o export
 

@@ -6,7 +6,7 @@ const animes =[
         estudio: "Wit Studio (Temporadas 1-3), MAPPA (Temporada Final)",
         anoLancamento: 2013,
         episodios: 89,
-        status: "Concluído",
+        status: "Finalizado",
         classificacao: "18+",
         temporadas: 4
     },
@@ -61,7 +61,7 @@ const animes =[
         estudio: "Studio Pierrot",
         anoLancamento: 2007,
         episodios: 500,
-        status: "Concluído",
+        status: "Finalizado",
         classificacao: "14+",
         temporadas: 1
     },
@@ -72,7 +72,7 @@ const animes =[
         estudio: "Madhouse",
         anoLancamento: 2011,
         episodios: 148,
-        status: "Concluído",
+        status: "Finalizado",
         classificacao: "16+",
         temporadas: 6
     },
@@ -83,7 +83,7 @@ const animes =[
         estudio: "Bones",
         anoLancamento: 2009,
         episodios: 64,
-        status: "Concluído",
+        status: "Finalizado",
         classificacao: "16+",
         temporadas: 1
     },
@@ -94,7 +94,7 @@ const animes =[
         estudio: "Madhouse",
         anoLancamento: 2006,
         episodios: 37,
-        status: "Concluído",
+        status: "Finalizado",
         classificacao: "16+",
         temporadas: 1
     },
